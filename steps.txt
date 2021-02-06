@@ -1,0 +1,32 @@
+1. Create node application using
+    npm init
+    Add all the basic details
+
+2. Create a new file with your entry point file name
+    i.e. index.js
+
+3. Install express
+    npm i express
+    or 
+    npm install express
+
+4. Use express in index.js 
+
+5. Add Listen Port function  and run command node index.js to run the application
+
+6. Define Routes:
+    request methods:
+        1. Get - View
+        2. Post - Insert
+        3. Put- Update
+        4. Delete- Delete
+
+7. Install Nodemon to recompile the application
+    npm i -g nodemon 
+    and run command nodemon index.js to automatic recompile the code.
+
+
+8. For UI 
+    npm install express-handlebars
+
+9. Follow the folder structure
