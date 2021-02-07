@@ -1,3 +1,4 @@
+Lecture 1:
 1. Create node application using
     npm init
     Add all the basic details
@@ -30,3 +31,26 @@
     npm install express-handlebars
 
 9. Follow the folder structure
+
+
+Lecture 2:
+1. Install bootstrap 
+2. Create partial for common header
+3. install Body parser
+4. create routes and add href in header partial
+5. MongoDb Atlas:
+1. Register/ login
+2. Create a new project
+3. create cluster-> choose connect
+    - choose free account
+    - select mumbai region
+    - add database user
+    - choose connection method - connect your application
+
+    //mongodb+srv://bhavna_11:<password>@cluster0.ocd2i.mongodb.net/<dbname>?retryWrites=true&w=majority
+
+4. go on collection
+    - add my own data
+
+
+6. Install mongoose and create connection
