@@ -49,13 +49,7 @@ app.get("/about",(req,res)=>{
 app.get("/contact",(req,res)=>{
     res.render('contact');
 })
-app.get("/add-task",(req,res)=>{
-    res.render('add_task');
-})
 
-app.post("/insert-task", (req,res)=>{
-    //console.log("Insert");
-    //console.log(req.body);
-    var title=req.body.title;
-    var description=req.body.description;
-})
+
+const taskRoute=require('./routes/taskRoute');
+app.use('/',taskRoute);
