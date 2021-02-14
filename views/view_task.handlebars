@@ -1,0 +1,16 @@
+<div class="container mt-4">
+    <h1 class="text-center text-info"> Task List</h1>
+    <div class="row">
+        {{#each tasks}}
+        <div class="col-md-4 mt-3">
+            <div class="card p-3">
+              <h3>{{title}}</h3>
+              <p>{{description}}</p>
+              <p class="text-right"><span><b>Date : </b>{{date}}</span></p>
+              <a class="btn btn-danger btn-sm" href="/delete-task/{{_id}}">Delete</a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+

@@ -41,4 +41,30 @@ router.post("/insert-task", (req,res)=>{
 }
 })
 
+router.get('/view-task', (req,res)=>{
+    Tasks.find({}).sort({date:'DESC'}).lean()
+    .then((data)=>{
+        //console.log(data);
+        res.render('view_task', {tasks:data});
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+    
+})
+
+router.get('/delete-task/:id',(req,res)=>{
+    //console.log("delete");
+    console.log(req.params.id);
+    console.log(req.params.name);
+    Tasks.deleteOne({_id:req.params.id})
+    .then(data=>{
+        console.log("Data Deleted Successfully!!!!");
+        res.redirect('/view-task');
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+})
+
 module.exports=router;
