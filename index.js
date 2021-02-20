@@ -52,4 +52,5 @@ app.get("/contact",(req,res)=>{
 
 
 const taskRoute=require('./routes/taskRoute');
-app.use('/',taskRoute);
+const userRoute=require('./routes/userRoute');
+app.use('/',taskRoute,userRoute);

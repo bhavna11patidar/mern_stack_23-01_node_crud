@@ -67,4 +67,45 @@ router.get('/delete-task/:id',(req,res)=>{
     })
 })
 
+
+router.get('/edit-task/:id', (req,res)=>{
+    Tasks.findOne({_id:req.params.id})
+    .then(data=>{
+        //console.log(data);
+        res.render('edit_task',data);
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+})
+
+router.post('/update-task', (req,res)=>{
+    let errors=[];
+    if(req.body.title==""){
+      errors.push({msg:"Title can't be blank!!"});  
+    }
+    if(req.body.description==""){
+        errors.push({msg:"Description can't be blank!!"});  
+    }
+
+    if(errors.length!=0){
+        res.render('add_task',{
+            title:req.body.title,
+            description:req.body.description,
+            errors:errors,
+        })
+    }
+    else{
+        Tasks.findOne({_id:req.body._id})
+        .then(data=>{
+            data.title=req.body.title;
+            data.description=req.body.description;
+            data.save()
+            .then(response=>{
+                console.log("Data Updated Successfully!!!");
+                res.redirect('/view-task');
+            })
+        })
+     }
+})
 module.exports=router;
