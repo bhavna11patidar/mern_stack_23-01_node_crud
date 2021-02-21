@@ -1,9 +1,6 @@
 let mongoose=require('mongoose');
 let Schema=mongoose.Schema;
 let newSchema=Schema({
-    googleId:{
-        type:String,
-    },
     name:{
         type:String,
         required:true,
@@ -13,6 +10,10 @@ let newSchema=Schema({
         required:true,
     },
     password:{
+        type:String,
+        required:true,
+    }, 
+    gender:{
         type:String,
         required:true,
     }

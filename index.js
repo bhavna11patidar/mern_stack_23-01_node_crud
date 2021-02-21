@@ -3,6 +3,8 @@ var exphbs  = require('express-handlebars');
 var bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 const app = express();
+var methodOverride = require('method-override');
+app.use(methodOverride('_method'));
 const port=5000;
 
 app.engine('handlebars', exphbs());

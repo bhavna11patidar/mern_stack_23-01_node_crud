@@ -108,4 +108,37 @@ router.post('/update-task', (req,res)=>{
         })
      }
 })
+
+
+router.put("/update-task/:id",(req,res)=>{
+   // console.log("Update with Put");
+   console.log(req.params.id);
+   let errors=[];
+   if(req.body.title==""){
+     errors.push({msg:"Title can't be blank!!"});  
+   }
+   if(req.body.description==""){
+       errors.push({msg:"Description can't be blank!!"});  
+   }
+
+   if(errors.length!=0){
+       res.render('add_task',{
+           title:req.body.title,
+           description:req.body.description,
+           errors:errors,
+       })
+   }
+   else{
+       Tasks.findOne({_id:req.params.id})
+       .then(data=>{
+           data.title=req.body.title;
+           data.description=req.body.description;
+           data.save()
+           .then(response=>{
+               console.log("Data Updated Successfully!!!");
+               res.redirect('/view-task');
+           })
+       })
+    }
+})
 module.exports=router;
