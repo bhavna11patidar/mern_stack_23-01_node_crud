@@ -2,7 +2,6 @@
     <div class="container mt-5">
 <h1 class="text-center text-info">Login</h1>
 <form action="/login" method="post">
- <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
   {{#each errors}}
     <div class="alert alert-danger">{{msg}}</div>
   {{/each}}
