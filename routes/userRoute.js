@@ -3,6 +3,7 @@ const router=express.Router();
 const User=require('./../model/User');
 const  bcrypt=require('bcryptjs');
 const passport=require('passport');
+const isGuestUser=require('./../helpers/authHelper').isGuestUser;
 router.get('/register',(req,res)=>{
     res.render('register');
 })
@@ -27,7 +28,8 @@ router.post('/register',(req,res)=>{
         User.findOne({email:req.body.email})
         .then(user=>{
             if(user){
-                console.log("Email Id already Exist")
+                console.log("Email Id already Exist");
+                req.flash('error_msg',"Email Id Already Exist!!!!");
                 res.redirect('/register');
             }else{
                // console.log("Inside else"); 
@@ -59,6 +61,7 @@ router.post('/register',(req,res)=>{
                     newUser.save()
                     .then(response=>{
                         console.log("User Inserted Successfully!!!!");
+                        req.flash('success_msg',"You r Registered successfully");
                         res.redirect('/register');
                     })
                     .catch(err=>{
@@ -77,7 +80,7 @@ router.post('/register',(req,res)=>{
     }   
 })
 
-router.get('/login',(req,res)=>{
+router.get('/login',isGuestUser,(req,res)=>{
     res.render('login');
 })
 
@@ -97,5 +100,16 @@ router.get('/logout',(req,res)=>{
     req.flash('success_msg',"You r logeout successfully");
     res.redirect('/login');
 })
+
+
+router.get('/google-auth',
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
+ 
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 module.exports=router;

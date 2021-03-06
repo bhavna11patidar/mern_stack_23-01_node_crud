@@ -15,6 +15,8 @@
       <li class="nav-item">
         <a class="nav-link" href="/contact">Contact</a>
       </li>
+
+      {{#if user}}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Task
@@ -23,8 +25,11 @@
           <a class="dropdown-item" href="add-task">Add Task</a>
           <a class="dropdown-item" href="view-task">View Task</a>
          </div>
-         
       </li>
+       <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+      {{else}}
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           User
@@ -32,10 +37,10 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/register">Register</a>
           <a class="dropdown-item" href="/login">Login</a>
-          <a class="dropdown-item" href="/logout">Logout</a>
          </div>
-         
       </li>
+      {{/if}}
+      
     
     </ul>
   </div>

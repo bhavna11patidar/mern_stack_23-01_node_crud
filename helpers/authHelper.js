@@ -1,0 +1,16 @@
+module.exports={
+    isAuthenticateduser:function(req,res,next){
+        if(req.isAuthenticated()){
+            next();
+        }else{
+            res.redirect('/login');
+        }
+    },
+    isGuestUser:function(req,res,next){
+        if(req.isAuthenticated()){
+            res.redirect('/view-task');
+        }else{
+            next();
+        }
+    }
+}

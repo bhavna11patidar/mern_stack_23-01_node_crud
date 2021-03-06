@@ -1,7 +1,8 @@
 const express=require('express');
 const router=express.Router();
 const Tasks=require('./../model/TaskModel');
-router.get("/add-task",(req,res)=>{
+const isAuthenticateduser=require('./../helpers/authHelper').isAuthenticateduser;
+router.get("/add-task",isAuthenticateduser,(req,res)=>{
     res.render('add_task');
 })
 
@@ -41,7 +42,7 @@ router.post("/insert-task", (req,res)=>{
 }
 })
 
-router.get('/view-task', (req,res)=>{
+router.get('/view-task', isAuthenticateduser, (req,res)=>{
     Tasks.find({}).sort({date:'DESC'}).lean()
     .then((data)=>{
         //console.log(data);

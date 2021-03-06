@@ -38,4 +38,21 @@ module.exports=function(passport){
     });
   });
 }
+
+/*var GoogleStrategy = require('passport-google-oauth20').Strategy;
+module.exports=function(passport){
+  passport.use(new GoogleStrategy({
+    clientID: require('./keys').googleClientID,
+    clientSecret: require('./keys').googleClientSecret,
+    callbackURL: "/auth/google/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    console.log(profile);
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
+}
+*/
          
