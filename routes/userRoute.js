@@ -102,14 +102,15 @@ router.get('/logout',(req,res)=>{
 })
 
 
-router.get('/google-auth',
-  passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] })
+  );
  
 router.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/view-task');
   });
 
 module.exports=router;

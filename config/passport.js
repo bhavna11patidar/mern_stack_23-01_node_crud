@@ -1,7 +1,7 @@
 const LocalStrategy=require('passport-local').Strategy;
 const User=require('./../model/User');
 const bcrypt=require('bcryptjs');
-module.exports=function(passport){
+/*module.exports=function(passport){
     passport.use(new LocalStrategy({usernameField:"email"}, (email, password, done)=>{
      User.findOne({'email':email})
      .then(user=>{
@@ -38,21 +38,48 @@ module.exports=function(passport){
     });
   });
 }
+*/
 
-/*var GoogleStrategy = require('passport-google-oauth20').Strategy;
+let GoogleStrategy = require('passport-google-oauth20').Strategy;
 module.exports=function(passport){
   passport.use(new GoogleStrategy({
     clientID: require('./keys').googleClientID,
     clientSecret: require('./keys').googleClientSecret,
     callbackURL: "/auth/google/callback"
   },
-  function(accessToken, refreshToken, profile, cb) {
+  function(accessToken, refreshToken, profile, done) {
     console.log(profile);
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+   /* User.findOrCreate({ googleId: profile.id }, function (err, user) {
       return cb(err, user);
     });
+    */
+   const newUser = {
+    googleID: profile.id,
+    name: profile.displayName,
+    email: profile.emails[0].value,
+    image: profile.photos[0].value,
+  };
+  User.findOne({ googleID: profile.id }).then((user) => {
+    if (user) {
+      done(null, user);
+    } else {
+      new User(newUser).save().then((user) => {
+        done(null, user);
+      });
+    }
+  });
+
   }
 ));
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+ 
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function (err, user) {
+    done(err, user);
+  });
+});
 }
-*/
+
          
